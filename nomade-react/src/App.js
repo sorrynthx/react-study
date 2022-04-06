@@ -30,8 +30,15 @@ function App() {
           placeholder="right your to do..." 
         />
         <button>Add To Do</button>
-        {toDos}
       </form>
+      <hr></hr>
+      <ul>
+        {toDos.map((item, index) => {
+          return (
+            <li key={index}>{item}</li>
+          )}
+        )}
+      </ul>
     </div>
   );
 }
