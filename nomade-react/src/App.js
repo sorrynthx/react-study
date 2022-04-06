@@ -1,23 +1,37 @@
-import {useState, useEffect} from 'react';
-
-function Hello() {
-  useEffect(() => {
-    console.log('Created :>');
-    return () => {console.log('Destroyed :<');}
-  }, []);
-  return <h1>Hello!!!</h1>;
-}
+import {useState} from 'react';
 
 function App() {
-  
- const [showing, setShowing] = useState(false);
- const onClick = () => {
-   setShowing((prev) => !prev);
- }
+  const [toDo, setToDo] = useState("");
+  const [toDos, setToDos] = useState([]);
+  const onChange = (event) => { setToDo(event.target.value); }
+  const onSubmit = (event) => {
+    // auto submit 방지
+    event.preventDefault();
+
+    if (toDo === "") return;
+    
+    // 배열에 이전 데이터와 같이 추가
+    setToDos((toDos) => [toDo, ...toDos]);
+    
+    // 값 초기화
+    setToDo("");
+  }
+
+  console.log(toDos);
+
   return (
     <div>
-      {showing ? <Hello /> : null}
-      <button onClick={onClick}>{showing ? 'hide' : 'show'}</button>
+      <h1>My To Dos ({toDos.length})</h1>
+      <form onSubmit={onSubmit}>
+        <input 
+          onChange={onChange} 
+          value={toDo} 
+          type="text" 
+          placeholder="right your to do..." 
+        />
+        <button>Add To Do</button>
+        {toDos}
+      </form>
     </div>
   );
 }
