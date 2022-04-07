@@ -1,44 +1,38 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
-function App() {
-  const [toDo, setToDo] = useState("");
-  const [toDos, setToDos] = useState([]);
-  const onChange = (event) => { setToDo(event.target.value); }
-  const onSubmit = (event) => {
-    // auto submit 방지
-    event.preventDefault();
-
-    if (toDo === "") return;
-    
-    // 배열에 이전 데이터와 같이 추가
-    setToDos((toDos) => [toDo, ...toDos]);
-    
-    // 값 초기화
-    setToDo("");
-  }
-
-  console.log(toDos);
-
+function Select(props) {
   return (
-    <div>
-      <h1>My To Dos ({toDos.length})</h1>
-      <form onSubmit={onSubmit}>
-        <input 
-          onChange={onChange} 
-          value={toDo} 
-          type="text" 
-          placeholder="right your to do..." 
-        />
-        <button>Add To Do</button>
-      </form>
-      <hr></hr>
-      <ul>
-        {toDos.map((item, index) => {
+    <select>
+        {props.data.map((coin) => {
           return (
-            <li key={index}>{item}</li>
+            <option key={coin.id}>
+              {coin.name} ({coin.symbol}) : ${coin.quotes.USD.price}
+            </option>
           )}
         )}
-      </ul>
+    </select>
+  );
+}
+
+function App() {
+  const [loading, setLoading] = useState(true);
+  const [coins, setCoins] = useState([]);
+  
+  // api 한번만 호출 
+  useEffect(() => {
+    // api 호출
+    fetch("https://api.coinpaprika.com/v1/tickers")
+      .then((response) => response.json()) // json 변환
+      .then((json) => {                    // json으로 변환된 데이터 coins에 추가
+        setCoins(json);
+        setLoading(false);                 // loading 숨김
+        
+      });
+  }, [] ) // []에 coins 넣으면 coins 변화 감지될때마다 api 실행
+  return (
+    <div>
+      <h1>Coins! {loading ? "" : `(${coins.length})`} </h1>            {/* `(${coins.length})` 괄호만 텍스트로 인식 */}  
+      {loading ? <strong>Loading...</strong> : <Select data={coins}/>} {/* loading true -> 로딩 false -> Select 영역 */}  
     </div>
   );
 }
