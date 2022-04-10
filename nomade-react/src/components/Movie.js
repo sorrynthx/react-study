@@ -8,7 +8,7 @@ function Movie({id, title, coverImg, summary, genres}) {
             {/* Link는 전체 새로고침 없음, a태그는 전체 새로고침 있음 */}
             <h2><Link to={`/movie/${id}`}>{title}</Link></h2>
             <img src={coverImg} alt={title}/>
-            <p>{summary}</p>
+            <p>{summary.length > 235 ? `${summary.slice(0, 235)}...` : summary}</p>
 
             <ul>
                 {
