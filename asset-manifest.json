@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/react-study/static/js/main.674dccfc.js",
+    "main.js": "/react-study/static/js/main.d771f75c.js",
     "index.html": "/react-study/index.html",
-    "main.674dccfc.js.map": "/react-study/static/js/main.674dccfc.js.map"
+    "main.d771f75c.js.map": "/react-study/static/js/main.d771f75c.js.map"
   },
   "entrypoints": [
-    "static/js/main.674dccfc.js"
+    "static/js/main.d771f75c.js"
   ]
 }
