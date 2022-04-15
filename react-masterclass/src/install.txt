@@ -3,3 +3,16 @@ vscode-styled-components
 
 # styled components
 npm i styled-components
+
+# typescript
+npm install -D typescript @types/node @types/react @types/react-dom @types/jest @types/styled-components
+
+최상단에 tsconfig.json, src안에 react-app-env.d.ts 파일 생성 
+(그냥 타입스크립트로 앱 생성 하는게 더 빠름)
+(코드 참고: https://github.com/nomadcoders/react-masterclass)
+
+--> js ===> tsx 로 변경
+
+리액트 18 index.tsx 에러 해결 방법
+https://bobbyhadz.com/blog/react-reacdom-render-no-longer-supported-in-react-18
+
