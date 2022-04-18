@@ -1,0 +1,19 @@
+# create app
+npx create-react-app coin-tracker --template typescript
+
+# style components and others typescript (https://styled-components.com/docs/api#typescript)
+npm i styled-components
+npm install -D typescript @types/node @types/react @types/react-dom @types/jest @types/styled-components
+
+# react router dom v5 + react-query 설치
+ npm i react-router-dom@5.3.0 react-query
+
+ # react-router-dom v5 typescript 설치
+ npm i --save-dev @types/react-router-dom
+
+ # reset css (https://github.com/zacanger/styled-reset/blob/master/src/index.ts)
+
+ # font (https://fonts.google.com/specimen/Do+Hyeon?subset=korean#standard-styles)
+
+ 
+ 
