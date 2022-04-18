@@ -4,16 +4,12 @@ import Coins from './Coins';
 
 function Router() {
     return (
-        <BrowserRouter>
-            <Switch>
-                <Route path="/:coinId">
-                    <Coin />
-                </Route>
-                <Route path="/">
-                    <Coins />
-                </Route>
-            </Switch>
-        </BrowserRouter>
-    )
+    <BrowserRouter>
+        <Switch>
+            <Route path="/:coinId" component={Coin} />
+            <Route path="/" component={Coins} />
+        </Switch>
+    </BrowserRouter>
+    );
 }
 export default Router;
