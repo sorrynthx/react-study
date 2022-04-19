@@ -3,13 +3,22 @@ npx create-react-app coin-tracker --template typescript
 
 # style components and others typescript (https://styled-components.com/docs/api#typescript)
 npm i styled-components
-npm install -D typescript @types/node @types/react @types/react-dom @types/jest @types/styled-components
+npm install @types/styled-components
 
+# vscode extension install
+vscode-styled-components 
+
+# react router dom v6 설치 (v5 버전 url은 변경되나 렌더링 안되는 문제)
+npm i react-router-dom@6.3.0
+npm i --save-dev  @types/react-router-dom
+ 
+################ v5 -> v6로 업데이트 ################## (무시 영역)
 # react router dom v5 + react-query 설치
- npm i react-router-dom@5.3.0 react-query
+npm i react-router-dom@5.3.0 react-query
 
- # react-router-dom v5 typescript 설치
- npm i --save-dev @types/react-router-dom
+# react-router-dom v5 typescript 설치
+npm i --save-dev @types/react-router-dom
+################ v5 -> v6로 업데이트 ################## (무시 영역)
 
  # reset css (https://github.com/zacanger/styled-reset/blob/master/src/index.ts)
 
