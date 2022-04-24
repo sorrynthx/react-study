@@ -143,14 +143,14 @@ interface PriceData {
 
 function Coin() {
     
-    const [loading, setLoading] = useState(true);
     // Coin.tsx에서 param 받기
     const {coinId} = useParams() as unknown as RouteParam;
     // Coin.tsx에서 state 받기
     const {state} = useLocation() as RouteState;
-
+    
     const [info, setInfo] = useState<InfoData>();
     const [priceInfo, setPriceInfo] = useState<PriceData>();
+    const [loading, setLoading] = useState(true);
 
     const priceMatch = useMatch("/:coinId/price");
     const chartMatch = useMatch("/:coinId/chart");
