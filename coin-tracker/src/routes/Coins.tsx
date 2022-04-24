@@ -69,12 +69,14 @@ function Coins() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        (async() => {
-          const response = await fetch("https://api.coinpaprika.com/v1/coins");
-          const json = await response.json();
-          setCoins(json.slice(0, 100));
-          setLoading(false);
-        })();
+        return () => {
+            (async() => {
+              const response = await fetch("https://api.coinpaprika.com/v1/coins");
+              const json = await response.json();
+              setCoins(json.slice(0, 100));
+              setLoading(false);
+            })();
+        }
     }, [])
     
     return (        
