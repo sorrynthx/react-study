@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import Router from "./routes/Router";
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 // reset css
 const GlobalStyle = createGlobalStyle`
@@ -69,6 +70,7 @@ function App() {
     <>
       <GlobalStyle />
       <Router /> 
+      <ReactQueryDevtools initialIsOpen={true} />
     </>
     
   );
