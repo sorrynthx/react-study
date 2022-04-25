@@ -1,12 +1,13 @@
 import { useQuery } from 'react-query';
 import { useOutletContext } from 'react-router-dom';
 import { fetchCoinHistory } from '../api';
+import ApexChart from "react-apexcharts";
 
 interface ChartProps {
   coinId: string;
 }
 
-interface ChartData {
+interface IHistorical {
   time_open: string;
   time_close: string;
   open: number;
@@ -20,10 +21,39 @@ interface ChartData {
 function Chart() { 
 
     const {coinId} = useOutletContext<ChartProps>();
-    const { isLoading: chartLoading, data: chartData } = useQuery<ChartData>(["ohlcv", coinId], () => fetchCoinHistory(coinId));
-    console.log(chartData);
+    const { isLoading: chartLoading, data: chartData } = useQuery<IHistorical[]>(["ohlcv", coinId], () => fetchCoinHistory(coinId));
+    
     return (
-      <h1>Chart</h1>
+      <>
+      <div>
+        { chartLoading 
+        ? 
+          "Loading Chart..." 
+        : 
+          <ApexChart 
+            type="line" 
+            series={[
+              {
+                name: "Price",
+                data: chartData?.map((price) => price.close) as number[]
+              }
+            ]}
+            options={{
+                      chart: {height: 300, width: 500, toolbar: {show: false}, background: "transparent"},
+                      theme: {mode: 'dark'},
+                      stroke: {curve: "smooth", width: 4},
+                      grid: {show: false},
+                      yaxis: {show: false},
+                      xaxis: {labels: {show: false}, axisTicks: {show: false}, axisBorder: {show: false}, categories: chartData?.map((price) => price.time_close) as string[], type: "datetime"},
+                      fill: {type: "gradient", gradient: {gradientToColors:["blue"], stops:[0, 100]}},
+                      colors: ["red"],
+                      tooltip: {y:{formatter: (value) => `$${value.toFixed(2)}`}},
+                      
+            }}
+          />
+        }
+      </div>
+      </>
     );
   }
   

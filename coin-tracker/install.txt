@@ -32,3 +32,6 @@ npm i --save-dev @types/react-router-dom
 
  컨트롤 + D -> 같은 문자열 선택
  알트 + 쉬프트 + i -> 선택된 문자열 우측으로 커서
+
+ # apex 차트
+npm install --save react-apexcharts apexcharts
