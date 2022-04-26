@@ -35,3 +35,7 @@ npm i --save-dev @types/react-router-dom
 
  # apex 차트
 npm install --save react-apexcharts apexcharts
+
+# react-hemlet (탭 타이틀 변경)
+npm i react-helmet-async
+npm i --save-dev @types/react-helmet
