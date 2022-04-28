@@ -39,3 +39,6 @@ npm install --save react-apexcharts apexcharts
 # react-hemlet (탭 타이틀 변경)
 npm i react-helmet-async
 npm i --save-dev @types/react-helmet
+
+# 상태 관리 리코일
+npm install recoil

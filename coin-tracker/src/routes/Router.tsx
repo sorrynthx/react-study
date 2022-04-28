@@ -4,20 +4,15 @@ import Coins from './Coins';
 import Chart from './Chart';
 import Price from './Price';
 
-interface IRouterProps {
-    toggleDark: () => void;
-    isDark: boolean;
-}
-
-function Router({toggleDark, isDark}: IRouterProps) {
+function Router() {
     return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-            <Route path="/:coinId" element={<Coin isDark={isDark} />}>
+            <Route path="/:coinId" element={<Coin />}>
                 <Route path="chart" element={<Chart />} />
                 <Route path="price" element={<Price />} />
             </Route>
-            <Route path="/" element={<Coins toggleDark={toggleDark} />} />
+            <Route path="/" element={<Coins />} />
         </Routes>
     </BrowserRouter>
     );

@@ -144,11 +144,7 @@ interface PriceData {
     };
 }
 
-interface ICoinProps {
-    isDark: boolean;
-}
-
-function Coin({isDark}: ICoinProps) {
+function Coin() {
     
     // Coin.tsx에서 param 받기
     const {coinId} = useParams() as unknown as RouteParam;
@@ -213,7 +209,7 @@ function Coin({isDark}: ICoinProps) {
                             <Link to={`/${coinId}/price`}>Price</Link>
                         </Tab>
                     </Tabs>
-                    <Outlet context={{coinId, isDark}} />
+                    <Outlet context={{coinId}} />
                 </>
              )
         }
