@@ -31,16 +31,33 @@ import {useForm} from "react-hook-form";
 // }
 
 function ToDoList() {
-    const {register, watch} = useForm();
-    console.log(watch());
-    
+    const {register, watch, handleSubmit, formState} = useForm();
+    const onValid = (data:any) => {
+        console.log(data);
+    }
+    //console.log(watch());
+    console.log(formState.errors);
+
     return (
         <div>
-            <form>
-                <input {...register("email")} placeholder="write a Email" /><br/>
-                <input {...register("name")} placeholder="write a Name" /><br/>
-                <input {...register("password")} placeholder="write a Password" /><br/>
-                <input {...register("password_confirm")} placeholder="write a Password Confirm" /><br/>
+            <form 
+                style={{display: 'flex', flexDirection: 'column'}} 
+                onSubmit={handleSubmit(onValid)}
+            >
+                <input 
+                    {...register("email", 
+                                    {
+                                        required: "Eamil 필수", 
+                                        minLength: {
+                                        value: 5, 
+                                        message: "최소 5자 이상"}
+                                    }
+                                )
+                    } placeholder="write a Email" /><br/>
+                
+                <input {...register("name", {required: true})} placeholder="write a Name" /><br/>
+                <input {...register("password", {required: true})} placeholder="write a Password" /><br/>
+                <input {...register("password_confirm", {required: true})} placeholder="write a Password Confirm" /><br/>
                 <button>Add</button>
             </form>
         </div>
