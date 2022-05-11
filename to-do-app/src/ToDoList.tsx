@@ -34,23 +34,23 @@ interface IForm {
     name?: string,  // 필수가 아닐때, ? 물음표 추가
     email: string,
     password: string,
-    password_confirm: string
+    password_confirm: string,
+    extraError?: string
 }
 
 function ToDoList() {
-    const {
-        register, 
-        watch, 
-        handleSubmit, 
-        formState:{errors}
-    } = useForm<IForm>({
+    const { register,  watch,  handleSubmit, formState:{errors}, setError } = useForm<IForm>({
         defaultValues: {
             email: "@naver.com",
             name: "홍길동",
         },
     });
-    const onValid = (data:any) => {
-        console.log(data);
+    const onValid = (data:IForm) => {
+        //console.log(data);
+        if (data.password !== data.password_confirm) {
+            setError("password_confirm", {message: "비밀번호가 일치하지 않아"}, {shouldFocus: true});
+        }
+        //setError("extraError", {message: "서버 점검저우..."});
     }
     //console.log(watch());
     console.log(errors);
@@ -82,7 +82,20 @@ function ToDoList() {
                 </span>
                 <br/>
                 
-                <input {...register("name", {required: "이름 필수!"})} placeholder="write a Name" /><br/>
+                <input 
+                    {...register("name", 
+                                    {
+                                        required: "이름 필수!", 
+                                        validate: {
+                                            noKim: (value) => value?.includes("kim") ? "kim은 사용금지" : true,
+                                            noLee: (value) => value?.includes("lee") ? "lee는 사용금지" : true,
+                                            // async로 DB에서 값 확인 가능함
+                                        }
+                                    }
+                                )
+                    } placeholder="write a Name" 
+                />
+                <br/>
                 <span>
                     {errors?.name?.message}
                 </span>
@@ -95,6 +108,9 @@ function ToDoList() {
                     {errors?.password_confirm?.message}
                 </span>
                 <button>Add</button>
+                <span>
+                    {errors?.extraError?.message}
+                </span>
             </form>
         </div>
     );
