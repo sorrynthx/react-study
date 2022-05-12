@@ -1,0 +1,37 @@
+# create app
+npx create-react-app react-hook-form-ex --template typescript
+
+# style components and others typescript (https://styled-components.com/docs/api#typescript)
+npm i styled-components
+npm install @types/styled-components
+
+# vscode extension install
+vscode-styled-components 
+
+# react router dom v6 설치 
+npm i react-router-dom@6.3.0
+npm i --save-dev  @types/react-router-dom
+
+# reset css (https://github.com/zacanger/styled-reset/blob/master/src/index.ts)
+# font (https://fonts.google.com/specimen/Do+Hyeon?subset=korean#standard-styles)
+
+* tip 
+ 크롬 콘솔창에서 우클릭 store object as global variable
+ 콘솔창에서 Object.keys(temp1).join() 모든 키 문자열로 출력
+ 콘솔창에서 Object.values(temp1).map(v => typeof v).join() 모든 값 타입 문자열로 출력
+
+ 컨트롤 + D -> 같은 문자열 선택
+ 알트 + 쉬프트 + i -> 선택된 문자열 우측으로 커서
+
+ # apex 차트
+npm install --save react-apexcharts apexcharts
+
+# react-hemlet (탭 타이틀 변경)
+npm i react-helmet-async
+npm i --save-dev @types/react-helmet
+
+# 상태 관리 리코일
+npm install recoil
+
+# 리액트 hook form 설치
+npm install react-hook-form
