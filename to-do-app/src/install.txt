@@ -1,5 +1,5 @@
 # create app
-npx create-react-app coin-tracker --template typescript
+npx create-react-app toDoApp --template typescript
 
 # style components and others typescript (https://styled-components.com/docs/api#typescript)
 npm i styled-components
