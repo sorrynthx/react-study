@@ -16,7 +16,7 @@ function ToDoList() {
 
     
     const { register, watch } = useForm();
-    console.log(watch());
+    console.log(watch(), 'watching...' );
     
     return (
         <div>
