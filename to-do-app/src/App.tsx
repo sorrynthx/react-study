@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import ToDoListFFF from "./ToDoList";
+import ToDoListFFF from "./components/ToDoList";
 
 // reset css
 const GlobalStyle = createGlobalStyle`
