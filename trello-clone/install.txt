@@ -39,3 +39,7 @@ npm install recoil
 # 리액트 쿼리
 npm i react-query
 npm i @types/react-query
+
+# react-beautiful-dnd
+npm i react-beautiful-dnd --legacy-peer-deps
+npm i --save-dev @types/react-beautiful-dnd
