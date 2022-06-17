@@ -43,3 +43,6 @@ npm i @types/react-query
 # react-beautiful-dnd
 npm i react-beautiful-dnd --legacy-peer-deps
 npm i --save-dev @types/react-beautiful-dnd
+
+# react-hook-form
+npm install react-hook-form
