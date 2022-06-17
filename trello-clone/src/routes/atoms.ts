@@ -24,7 +24,14 @@ export const hourSelector = selector<number>({
 
 
 // react-beautiful-dnd recoil
-export const toDoState = atom({
+interface ITodoState {
+    [key: string]: string[];
+}
+export const toDoState = atom<ITodoState>({
     key: "toDo",
-    default: ["a", "b", "c", "d", "e", "f"],
+    default: {
+        "To Do": ["a", "b"],
+        Doing: ["c", "d", "e"],
+        Done: ["f"],
+    },
 });

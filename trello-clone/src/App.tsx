@@ -1,14 +1,15 @@
 import {DragDropContext, Droppable, DropResult} from 'react-beautiful-dnd';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+import Board from './Components/Board';
 import DragabbleCard from './Components/DragabbleCard';
 import { toDoState } from './routes/atoms';
 
 
 const Wrapper = styled.div`
   display: flex;
-  max-width: 480px;
-  width: 100%;
+  max-width: 680px;
+  width: 100vw;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -16,18 +17,14 @@ const Wrapper = styled.div`
 
 `;
 const Boards = styled.div`
-  display: grid;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   width: 100%;
-  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
 `;
 
-const Board = styled.div`
-  padding: 20px 10px;
-  padding-top: 30px;
-  background-color: ${(props) => props.theme.boardColor};
-  border-radius: 5px;
-  min-height: 200px;
-`;
 
 
 function App() {
@@ -35,33 +32,42 @@ function App() {
   const [toDos, setToDos] = useRecoilState(toDoState);
 
   // Drag 끝났을때,
-  const onDragEnd = ({draggableId, destination, source}: DropResult) => {
+  const onDragEnd = (info: DropResult) => {
     
-    // 목적지 (이동) 없을 때,
+    // source -> destination
+    console.log(info);
+    const {destination, draggableId, source} = info;
+    
     if (!destination) return;
+    
+    // 같은 보드 안에서 움직임
+    if (destination?.droppableId === source.droppableId) {
+      setToDos((allBoards) => {
+        const boardCopy = [...allBoards[source.droppableId]];
+        boardCopy.splice(source.index, 1);
+        boardCopy.splice(destination?.index, 0, draggableId);
+        return {
+          ...allBoards,
+          [source.droppableId]: boardCopy
+        };
+      });
+    }
 
-    // 목적지 (이동) 있을 때,
-    setToDos(oldToDos => {
-      // 원본 변경하지 않고 복사해서 사용
-      const toDosCopy = [...oldToDos];
+    // 다른 보드로 움직임
+    if (destination?.droppableId !== source.droppableId) {
+      setToDos((allBoard) => {
+        const sourceBoard = [...allBoard[source.droppableId]];
+        const destinationBoard = [...allBoard[destination.droppableId]];
+        sourceBoard.splice(source.index, 1);
+        destinationBoard.splice(destination?.index, 0, draggableId);
+        return {
+          ...allBoard,
+          [source.droppableId]: sourceBoard,
+          [destination.droppableId]: destinationBoard,
+        }
+      });
+    }
 
-      console.log("Delete item on", source.index);
-      console.log(toDosCopy);
-
-      // 1. source.index 아이템 삭제
-      toDosCopy.splice(source.index, 1);
-
-      console.log("Delete item");
-      console.log(toDosCopy);
-
-      // 2. destination.index 아이템에 넣기
-      toDosCopy.splice(destination?.index, 0, draggableId);
-
-      console.log("Put back", draggableId, "on", destination.index);
-      console.log(toDosCopy);
-
-      return toDosCopy;
-    })
   };
   
   return (
@@ -69,16 +75,12 @@ function App() {
       <DragDropContext onDragEnd={onDragEnd}>
         <Wrapper>
           <Boards>
-            <Droppable droppableId='one'>
-            {(magic) => (
-                <Board ref={magic.innerRef} {...magic.droppableProps}>
-                  {toDos.map((toDo, index) => (
-                <DragabbleCard key={toDo} index={index} toDo={toDo} />
-             ))}
-              {magic.placeholder}
-             </Board>
-            )}
-            </Droppable>
+            {
+              Object.keys(toDos).map(
+                boardId => 
+                <Board boardId={boardId} key={boardId} toDos={toDos[boardId]} />
+              )
+            }
           </Boards>
         </Wrapper>
       </DragDropContext>
