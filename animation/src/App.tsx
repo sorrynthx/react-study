@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {motion} from 'framer-motion'
+import { RecoilBridge } from "recoil";
 
 const Wrapper = styled.div `
   height: 100vh;
@@ -73,10 +74,50 @@ const myVars = {
       }
 }
 
+const Box3 = styled(motion.div)`
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`;
+const box3Variants = {
+  hover: { scale: 1.5, rotateZ: 90},
+  click: { scale: 1, borderRadius: "100px" }
+};
+
+const Box4 = styled(motion.div)`
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`;
+const box4Variants = {
+  hover: { scale: 1.5, rotateZ: 90},
+  click: { scale: 1, borderRadius: "100px" },
+  drag: {backgroundColor: "rgb(46,204,113)", transition: {duration: 2} }
+};
+
 function App() {
     return (
       <Wrapper>
         
+        <Box4
+          drag
+          variants={box4Variants}
+          whileHover="hover"
+          whileDrag="drag"
+          whileTap="click"
+        />
+
+        <Box3 
+          variants={box3Variants}
+          whileHover="hover"
+          whileTap="click"
+        />
+
+
         <Box2 variants={box2Vars} initial="start" animate="end">
           <Circle variants={circleVariants} />
           <Circle variants={circleVariants} />
