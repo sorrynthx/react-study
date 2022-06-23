@@ -55,7 +55,6 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    background:linear-gradient(135deg,#e09,#d0e);
     font-family: 'Do Hyeon', sans-serif;
   }
   a {
