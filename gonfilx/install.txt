@@ -27,5 +27,5 @@ npm i --save-dev @types/react-beautiful-dnd
 # react-hook-form
 npm install react-hook-form
 
-# animation
+# animation framer
 npm install framer-motion
