@@ -1,0 +1,31 @@
+# create app
+npx create-react-app gonflix --template typescript
+
+# style components and others typescript (https://styled-components.com/docs/api#typescript)
+npm i styled-components
+npm install @types/styled-components
+
+# react router dom v6 설치
+npm i react-router-dom@6.3.0
+npm i --save-dev  @types/react-router-dom
+
+# 상태 관리 리코일
+npm install recoil
+
+# react-hemlet (탭 타이틀 변경)
+npm i react-helmet-async
+npm i --save-dev @types/react-helmet
+
+# 리액트 쿼리
+npm i react-query
+npm i @types/react-query
+
+# react-beautiful-dnd
+npm i react-beautiful-dnd --legacy-peer-deps
+npm i --save-dev @types/react-beautiful-dnd
+
+# react-hook-form
+npm install react-hook-form
+
+# animation
+npm install framer-motion
