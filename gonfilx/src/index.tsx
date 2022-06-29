@@ -6,7 +6,7 @@ import App from './App';
 import { theme } from './theme';
 
 // reset css
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle` 
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -58,15 +58,17 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    background-color: black;
-    color: white;
+    font-weight: 300;
     font-family: 'Do Hyeon', sans-serif;
+    color:${(props) => props.theme.white.darker};
+    line-height: 1.2;
+    background-color: black;
   }
   a {
-    text-decoration: none;
-    color: inherit;
+    text-decoration:none;
+    color:inherit;
   }
-`
+`;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

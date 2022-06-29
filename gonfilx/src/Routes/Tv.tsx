@@ -1,6 +1,6 @@
 function Tv() {
     return (
-        <>Tv</>
+        <div style={{ backgroundColor: "whitesmoke", height: "200vh" }}>Tv 쑈</div>
     )
 }
 
