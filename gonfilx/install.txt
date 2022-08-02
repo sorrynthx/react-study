@@ -29,3 +29,8 @@ npm install react-hook-form
 
 # animation framer
 npm install framer-motion
+
+
+
+// THEMOVIEDB.ORG  API KEY
+bc51ec97a9e2a30b346298351d4167e5
