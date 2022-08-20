@@ -16,13 +16,13 @@ const Loader = styled.div`
     align-items: center;
 `;
 
-const Banner = styled.div<{bgPhoto: string}>`
+const Banner = styled.div<{bgphoto: string}>`
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 60px;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${(props) => props.bgPhoto});
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${(props) => props.bgphoto});
     background-size: cover;
 `;
 
@@ -49,13 +49,19 @@ const Row = styled(motion.div)`
     width: 100%;
 `;
 
-const Box = styled(motion.div)<{bgPhoto: string}>`
+const Box = styled(motion.div)<{bgphoto: string}>`
     background-color: white;
     height: 200px;
-    background-image: url(${(props) => props.bgPhoto});
+    background-image: url(${(props) => props.bgphoto});
     background-size: cover;
     background-position: center center;
     font-size: 65px;
+    &:first-child {
+        transform-origin: center left;
+    }
+    &:last-child {
+        transform-origin: center right;
+    }
 `;
 
 const rowVariants = {
@@ -69,6 +75,22 @@ const rowVariants = {
         x: -window.outerWidth - 5,
     },
 }
+
+const boxVariants = {
+    nomal: {
+        scale: 1,
+    },
+    hover: {
+        scale: 1.3,
+        y: -50,
+        transition: {
+            delay: 0.5,
+            duration: 0.3,
+            type:"tween"
+        }
+    },
+}
+
 
 const offset = 6;
 
@@ -99,7 +121,7 @@ function Home() {
                 <>
                     <Banner 
                         onClick={increaseIndex} 
-                        bgPhoto={makeImagePath(data?.results[0].backdrop_path || "")}>
+                        bgphoto={makeImagePath(data?.results[0].backdrop_path || "")}>
                         <Title>{data?.results[0].title}</Title>
                         <Overview>{data?.results[0].overview}</Overview>
                     </Banner>
@@ -119,7 +141,11 @@ function Home() {
                                 {data?.results.slice(1).slice(offset*index, offset*index+offset).map((movie) => (
                                     <Box 
                                         key={movie.id}
-                                        bgPhoto={makeImagePath(movie?.backdrop_path, "w500")}
+                                        whileHover="hover"
+                                        initial="nomal"
+                                        variants={boxVariants}
+                                        transition={{type:"tween"}}
+                                        bgphoto={makeImagePath(movie?.backdrop_path, "w500")}
                                     />
 
                                 ))}
