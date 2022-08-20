@@ -93,10 +93,34 @@ const BigMovie = styled(motion.div)`
     position: absolute;
     width: 40vw;
     height: 80vh;
-    background-color: pink;
+    background-color: ${(props) => props.theme.black.lighter};
     left:0;
     right: 0;
     margin: 0 auto;
+    border-radius: 15px;
+    overflow: hidden;
+`;
+
+const BigCover = styled.div`
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 400px;
+`;
+
+const BigTitle = styled.h3`
+    color: ${(props) => props.theme.white.lighter};
+    padding: 20px;
+    font-size: 46px;
+    position: relative; 
+    top: -80px; 
+`;
+
+const BigOverview = styled.p`
+    padding: 20px;
+    position: relative; 
+    top: -100px; 
+    color: ${(props) => props.theme.white.lighter};
 `;
 
 const rowVariants = {
@@ -167,6 +191,8 @@ function Home() {
     const onOverlayClkick = () => {
         history(`/`);
     }
+    const clickedMovie = bigMovieMatch?.params.movieId && data?.results.find((movie) => movie.id+"" === bigMovieMatch.params.movieId);
+    
     return (
         <Wrapper>
             {
@@ -226,7 +252,23 @@ function Home() {
                                 <BigMovie
                                     layoutId={bigMovieMatch.params.movieId} 
                                     style={{top: scrollY.get() + 100}}
-                                >movie info area</BigMovie>
+                                >
+                                    {
+                                        clickedMovie && 
+                                        <>
+                                            <BigCover 
+                                                style={{ 
+                                                    backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
+                                                        clickedMovie.backdrop_path, 
+                                                        "w500"
+                                                    )})`
+                                                }} 
+                                            />
+                                            <BigTitle>{clickedMovie.title}</BigTitle>
+                                            <BigOverview>{clickedMovie.overview}</BigOverview>
+                                        </>
+                                    }
+                                </BigMovie>
                             )
                             </>
                             : 
